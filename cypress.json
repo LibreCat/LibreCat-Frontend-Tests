@@ -1,4 +1,5 @@
 {
+  "projectId": "511wso",
   "baseUrl": "http://localhost:5001",
   "videoRecording": false,
   "defaultCommandTimeout": 2000,

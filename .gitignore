@@ -60,3 +60,6 @@ typings/
 # Cypress
 cypress/screenshots/
 cypress/videos/
+
+#Custom
+run-tests.sh
