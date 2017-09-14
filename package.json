@@ -1,0 +1,20 @@
+{
+  "name": "librecat-frontend-tests",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "cypress run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LibreCat/LibreCat-Frontend-Tests.git"
+  },
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/LibreCat/LibreCat-Frontend-Tests/issues"
+  },
+  "homepage": "https://github.com/LibreCat/LibreCat-Frontend-Tests#readme",
+  "devDependencies": {
+    "cypress": "^0.20.0"
+  }
+}
