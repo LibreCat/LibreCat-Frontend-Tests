@@ -6,7 +6,7 @@ In order to run the tests locally:
 
 * Make sure LibreCat is running at http://localhost:5001
 * Clone this repository
-* cd LibreCat-Frontend-Tests
+* `cd LibreCat-Frontend-Tests`
 * Execute `npm install`
 
 ## Usage
