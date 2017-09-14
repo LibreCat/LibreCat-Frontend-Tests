@@ -6,6 +6,7 @@ In order to run the tests locally:
 
 * Make sure LibreCat is running at http://localhost:5001
 * Clone this repository
+* cd LibreCat-Frontend-Tests
 * Execute `npm install`
 
 ## Usage
@@ -16,10 +17,10 @@ npm test
 ```
 or
 ```
-$(npm bim)/cypress run
+$(npm bin)/cypress run
 ```
 
 ### Test execution in Cypress GUI 
 ```
-cypress open
+$(npm bin)/cypress open
 ```
