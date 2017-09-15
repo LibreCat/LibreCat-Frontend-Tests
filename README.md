@@ -19,6 +19,14 @@ or
 ```
 $(npm bin)/cypress run
 ```
+or you can install Cypress globally:
+```
+npm install --global cypress
+```
+and just run tests like this:
+``` 
+cypress run
+```
 
 ### Test execution in Cypress GUI 
 ```
