@@ -1,31 +1,33 @@
 describe('The login page', function() {
-    it('should display a warning when caps lock is on', function() {
-        cy.visit('/login');
+    l10n(() => {
+        it('should display a warning when caps lock is on', function() {
+            cy.visit('/login');
 
-        cy.get('#caps_alert').as('alert')
-            .should('have.text', 'Caps Lock is on!')
-            .should('not.be.visible');
+            cy.get('#caps_alert').as('alert')
+                .should('have.text', this.t.login.caps_lock_warning)
+                .should('not.be.visible');
 
-        cy.get('#id_password').as('password')
-            .type('T');
+            cy.get('#id_password').as('password')
+                .type('T');
 
-        cy.get('@alert').should('be.visible');
+            cy.get('@alert').should('be.visible');
 
-        cy.get('@password').type('e');
+            cy.get('@password').type('e');
 
-        cy.get('@alert').should('not.be.visible');
-    });
+            cy.get('@alert').should('not.be.visible');
+        });
 
-    it('should not display a warning when capital letters are typed with the shift key', function() {
-        cy.visit('/login');
+        it('should not display a warning when capital letters are typed with the shift key', function() {
+            cy.visit('/login');
 
-        cy.get('#caps_alert').as('alert')
-            .should('have.text', 'Caps Lock is on!')
-            .should('not.be.visible');
+            cy.get('#caps_alert').as('alert')
+                .should('have.text', this.t.login.caps_lock_warning)
+                .should('not.be.visible');
 
-        cy.get('#id_password').type('{shift}TESTPASSWORD');
+            cy.get('#id_password').type('{shift}TESTPASSWORD');
 
-        cy.get('@alert').should('not.be.visible');
+            cy.get('@alert').should('not.be.visible');
+        });
     });
 
     it('should redirect to /librecat upon login', function() {

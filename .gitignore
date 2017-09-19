@@ -63,3 +63,5 @@ cypress/videos/
 
 #Custom
 run-tests.sh
+cypress.env.json
+l10n/

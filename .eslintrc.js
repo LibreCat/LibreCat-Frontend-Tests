@@ -6,6 +6,7 @@ module.exports = {
     },
     "rules": {
         "indent": 2,
-        "max-len": [2, 120]
+        "max-len": [2, 120],
+        "no-invalid-this": 0
     }
 };

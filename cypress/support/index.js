@@ -14,4 +14,6 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
+import './l10n';
 import './commands/login';
+import './commands/should';

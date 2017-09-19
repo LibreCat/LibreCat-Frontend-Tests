@@ -13,9 +13,9 @@ describe('The Add New Publication page', function() {
 
             cy.get('a[href*="/librecat/record/new?type="]')
                 .should('have.length', 19)
-                .then(function($els) {
+                .then(($els) => {
                     return Cypress._.chain($els)
-                        .map('href').map(function(i) {
+                        .map('href').map((i) => {
                             return Cypress._.replace(i, /^.+new\?type=(.+)$/, '$1');
                         })
                         .value();
@@ -25,7 +25,7 @@ describe('The Add New Publication page', function() {
     });
 
     describe('The edit form', function() {
-        modes.forEach(function(mode) {
+        modes.forEach((mode) => {
             describe(`In ${mode} mode`, function() {
                 it('should load succesfully', function() {
                     cy.visit(`/librecat/record/new?type=${mode}`);

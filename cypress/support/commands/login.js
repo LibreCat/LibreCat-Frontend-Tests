@@ -1,6 +1,6 @@
 global.plack_sessions = {};
 
-Cypress.Commands.add('login', function(username, password) {
+Cypress.Commands.add('login', (username, password) => {
     username = username || 'test';
     password = password || 'secret';
 
@@ -8,7 +8,7 @@ Cypress.Commands.add('login', function(username, password) {
     let log = Cypress.log({
         name: 'login',
         message: [username, password],
-        consoleProps: function() {
+        consoleProps: () => {
             return {
                 username: username,
                 password: password,
@@ -32,17 +32,17 @@ Cypress.Commands.add('login', function(username, password) {
             });
 
         // ... and save it
-        cy.getCookie('plack_session', {log: false}).then(function(cookie) {
+        cy.getCookie('plack_session', {log: false}).then((cookie) => {
             global.plack_sessions[username] = cookie;
         });
     }
 
     // Set cookie again and end this command
-    cy.then(function() {
+    cy.then(() => {
         let cookie = Object.assign(global.plack_sessions[username], {log: false});
 
         cy.setCookie('plack_session', cookie.value, cookie)
-            .then(function() {
+            .then(() => {
                 log.snapshot().end();
             });
     });

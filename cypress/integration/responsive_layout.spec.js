@@ -8,8 +8,8 @@ describe('The responsiveness of the app', function() {
         'macbook-15',
     ];
 
-    devices.forEach(function(device) {
-        ['portrait', 'landscape'].forEach(function(mode) {
+    devices.forEach((device) => {
+        ['portrait', 'landscape'].forEach((mode) => {
             it(`should look good on a(n) ${device} in ${mode} mode`, function() {
                 cy.viewport(device, mode);
 
