@@ -1,4 +1,4 @@
-describe('The person profile page', function() {
+describe('The Author detail page', function() {
     it('should load successfully', function() {
         cy.visit('/person/1');
     });
