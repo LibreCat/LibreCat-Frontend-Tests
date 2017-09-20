@@ -17,3 +17,4 @@
 import './l10n';
 import './commands/login';
 import './commands/should';
+import './commands/prop';

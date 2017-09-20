@@ -28,28 +28,30 @@ describe('The login page', function() {
 
             cy.get('@alert').should('not.be.visible');
         });
-    });
 
-    it('should redirect to /librecat upon login', function() {
-        cy.visit('/login');
+        it('should redirect to /librecat upon login', function() {
+            cy.visit('/login');
 
-        cy.contains('My Publication List').should('not.exist');
+            cy.contains('My Publication List').should('not.exist');
 
-        cy.get('#id_login')
-            .should('be.visible')
-            .type('test');
+            cy.get('#id_login')
+                .should('be.visible')
+                .type('test');
 
-        cy.get('#id_password')
-            .should('be.visible')
-            .type('secret');
+            cy.get('#id_password')
+                .should('be.visible')
+                .type('secret');
 
-        cy.get('input[type=submit][value=Login]')
-            .should('be.visible')
-            .click();
+            cy.get(`input[type=submit][value=${this.t.login.login_button}]`)
+                .should('be.visible')
+                .click();
 
-        cy.url().should('match', /\/librecat$/);
+            cy.url().should('match', /\/librecat$/);
 
-        cy.contains('My Publication List').should('be.visible');
+            // NOTE: There's a bug here, this should be in German but locale is overwritten during login
+            // See LibreCat issue #305 (https://github.com/LibreCat/LibreCat/issues/305)
+            cy.contains('My Publication List').should('be.visible');
+        });
     });
 
     describe('As regular user', function() {
@@ -57,7 +59,6 @@ describe('The login page', function() {
             cy.visit('/login');
 
             cy.get('#id_login').type('test');
-
             cy.get('#id_password').type('secret{enter}');
 
             cy.get('a.dropdown-toggle:contains("Admin")').should('not.exist');
@@ -73,7 +74,6 @@ describe('The login page', function() {
             cy.visit('/login');
 
             cy.get('#id_login').type('einstein');
-
             cy.get('#id_password').type('einstein{enter}');
 
             cy.get('a.dropdown-toggle:contains("Admin")')

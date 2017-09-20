@@ -1,18 +1,20 @@
-describe('The Manage Accounts Page', function() {
+describe('The Manage Accounts page', function() {
     it('should not be publically exposed', function() {
         cy.visit('/librecat/admin/account');
 
         cy.url().should('match', /\/login\?return_url=.*%2Flibrecat%2Fadmin%2Faccount$/);
 
-        cy.contains('Manage Account Information').should('not.exist');
+        cy.get('.page-header h1').should('not.exist');
 
         cy.get('#id_login').type('einstein');
-
         cy.get('#id_password').type('einstein{enter}');
 
         cy.url().should('match', /\/librecat\/admin\/account/);
 
-        cy.contains('Manage Account Information').should('be.visible');
+        cy.get('.page-header h1')
+            .should('be.visible')
+            .prop('innerText')
+            .should('eq', 'Manage Account Information');
     });
 
     describe('As unauthorized user', function() {
