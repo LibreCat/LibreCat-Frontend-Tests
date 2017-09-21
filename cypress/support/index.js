@@ -14,7 +14,8 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
-import './l10n';
+import './chai.helpers';
 import './commands/login';
 import './commands/should';
 import './commands/prop';
+import './l10n';
