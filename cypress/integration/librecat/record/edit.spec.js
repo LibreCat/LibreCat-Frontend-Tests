@@ -36,7 +36,7 @@ describe('The Edit publication page', function() {
                 .next('img')
                 .should('have.attr', 'alt', 'Not Authorized')
                 .should('have.attr', 'src')
-                .should('endWith', 'authorized_no.png');
+                .should('end.with', 'authorized_no.png');
 
             cy.get('@internal')
                 .click()
@@ -44,7 +44,7 @@ describe('The Edit publication page', function() {
                 .next('img')
                 .should('have.attr', 'alt', 'Authorized')
                 .should('have.attr', 'src')
-                .should('endWith', 'authorized_yes.png');
+                .should('end.with', 'authorized_yes.png');
 
             cy.get('@first').should('be.readonly');
 
