@@ -3,7 +3,7 @@ describe('The file upload function', function() {
         cy.login();
     });
 
-    it('should ', function() {
+    it('should be able to upload a file', function() {
         cy.visit('/librecat/record/new?type=book');
 
         cy.server();
