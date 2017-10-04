@@ -74,7 +74,7 @@ describe('The Edit publication page', function () {
         it('should be able to reorder authors', function () {
             cy.get('#creator .row:eq(0) span:contains("First Name")')
                 .trigger('mousedown', { which: 1 })
-                .trigger('mousemove', {pageX: 369, pageY: 500})
+                .trigger('mousemove', { pageX: 369, pageY: 490 })
                 .trigger('mouseup');
 
             cy.get('#first_name_0').should('have.value', 'Jonas');
