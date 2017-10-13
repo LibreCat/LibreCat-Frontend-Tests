@@ -5,19 +5,23 @@ Cypress.Commands.add('login', (username, password) => {
     password = password || 'secret';
 
     // Initiate command log
+    let consoleProps = {
+        username: username,
+        password: password,
+    };
+
     let log = Cypress.log({
         name: 'login',
         message: [username, password],
         consoleProps: () => {
-            return {
-                username: username,
-                password: password,
-            };
+            return consoleProps;
         },
     });
 
-        // If we don't have a cookie for {username} yet...
+    // If we don't have a cookie for {username} yet...
     if (!global.plack_sessions[username]) {
+        cy.clearCookie('plack_session', {log: false});
+
         // ... go get it ...
         cy.request(
             {
@@ -40,6 +44,8 @@ Cypress.Commands.add('login', (username, password) => {
     // Set cookie again and end this command
     cy.then(() => {
         let cookie = Object.assign(global.plack_sessions[username], {log: false});
+
+        consoleProps.cookie = cookie.value;
 
         cy.setCookie('plack_session', cookie.value, cookie)
             .then(() => {

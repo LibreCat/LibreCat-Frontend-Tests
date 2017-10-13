@@ -50,12 +50,6 @@ describe('The quick and easy upload feature', function() {
 
         cy.get('a:contains("New Quick And Easy Publication - Will be edited by LibreCat team")')
             .map('href')
-            .each(function(url) {
-                cy.visit(url);
-
-                cy.on('window:confirm', () => true);
-
-                cy.contains('.btn.btn-danger', 'Delete').click();
-            });
+            .each(cy.deleteRecord);
     });
 });

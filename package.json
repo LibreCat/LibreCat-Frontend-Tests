@@ -17,5 +17,8 @@
   "devDependencies": {
     "cypress": "^1.0.1",
     "he": "^1.1.1"
+  },
+  "dependencies": {
+    "lorem-ipsum": "^1.0.4"
   }
 }
