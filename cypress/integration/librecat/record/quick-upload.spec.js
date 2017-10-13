@@ -53,13 +53,9 @@ describe('The quick and easy upload feature', function() {
             .each(function(url) {
                 cy.visit(url);
 
-                cy.on('window:confirm', function(message) {
-                    debugger;
-                    return true;
-                });
+                cy.on('window:confirm', () => true);
 
-                cy.contains('.btn.btn-danger', 'Delete')
-                    .click();
+                cy.contains('.btn.btn-danger', 'Delete').click();
             });
     });
 });
