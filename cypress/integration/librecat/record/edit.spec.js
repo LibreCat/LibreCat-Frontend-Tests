@@ -1,37 +1,37 @@
-describe('The Edit publication page', function () {
-    beforeEach(function () {
-        cy.login('einstein', 'einstein');
+describe('The Edit publication page', function() {
+    beforeEach(function() {
+        cy.login();
     });
 
-    it('should load successfully', function () {
-        cy.visit('/librecat/record/edit/2737388');
+    it('should load successfully', function() {
+        cy.visit('/librecat/record/edit/2737394');
     });
 
-    describe('The author field', function () {
-        it('should have 3 authors', function () {
-            cy.get('#creator .row').should('have.length', 3);
+    describe('The author field', function() {
+        it('should have 2 authors', function() {
+            cy.get('#creator .row').should('have.length', 2);
         });
 
-        it('should be able to add an author', function () {
+        it('should be able to add an author', function() {
             cy.get('#last_name_0 ~ .input-group-addon .fa-plus')
                 .click();
 
-            cy.get('#creator .row').should('have.length', 4);
+            cy.get('#creator .row').should('have.length', 3);
 
-            cy.get('#first_name_3').should('have.value', '');
-            cy.get('#last_name_3').should('have.value', '');
+            cy.get('#first_name_2').should('have.value', '');
+            cy.get('#last_name_2').should('have.value', '');
         });
 
-        it('should be able to change to an internal author', function () {
-            cy.get('#first_name_3').as('first')
+        it('should be able to change to an internal author', function() {
+            cy.get('#first_name_2').as('first')
                 .should('not.be.readonly')
                 .type('Elvis');
 
-            cy.get('#last_name_3').as('last')
+            cy.get('#last_name_2').as('last')
                 .should('not.be.readonly')
                 .type('Presley');
 
-            cy.get('#idm_intern_3').as('internal')
+            cy.get('#idm_intern_2').as('internal')
                 .should('not.be.checked')
                 .next('img')
                 .should('have.attr', 'alt', 'Not Authorized')
@@ -51,40 +51,34 @@ describe('The Edit publication page', function () {
             cy.get('@last').should('be.readonly');
         });
 
-        it('should be able to remove an author', function () {
-            cy.get('#creator .row').should('have.length', 4);
+        it('should be able to remove an author', function() {
+            cy.get('#creator .row').should('have.length', 3);
 
-            cy.get('#last_name_3 ~ .input-group-addon .fa-minus')
+            cy.get('#last_name_2 ~ .input-group-addon .fa-minus')
                 .click();
 
-            cy.get('#creator .row').should('have.length', 3);
+            cy.get('#creator .row').should('have.length', 2);
         });
 
-        it('should be ordered', function () {
-            cy.get('#first_name_0').should('have.value', 'Marilyn');
-            cy.get('#last_name_0').should('have.value', 'Monroe');
+        it('should be ordered', function() {
+            cy.get('#first_name_0').should('have.value', 'Test');
+            cy.get('#last_name_0').should('have.value', 'User');
 
-            cy.get('#first_name_1').should('have.value', 'Jonas');
-            cy.get('#last_name_1').should('have.value', 'Billet');
-
-            cy.get('#first_name_2').should('have.value', 'Filip');
-            cy.get('#last_name_2').should('have.value', 'Du Prez');
+            cy.get('#first_name_1').should('have.value', 'Alan');
+            cy.get('#last_name_1').should('have.value', 'Smith');
         });
 
-        it('should be able to reorder authors', function () {
+        it('should be able to reorder authors', function() {
             cy.get('#creator .row:eq(0) span:contains("First Name")')
-                .trigger('mousedown', { which: 1 })
-                .trigger('mousemove', { pageX: 369, pageY: 490 })
+                .trigger('mousedown', {which: 1})
+                .trigger('mousemove', {pageX: 380, pageY: 440})
                 .trigger('mouseup');
 
-            cy.get('#first_name_0').should('have.value', 'Jonas');
-            cy.get('#last_name_0').should('have.value', 'Billet');
+            cy.get('#first_name_0').should('have.value', 'Alan');
+            cy.get('#last_name_0').should('have.value', 'Smith');
 
-            cy.get('#first_name_1').should('have.value', 'Marilyn');
-            cy.get('#last_name_1').should('have.value', 'Monroe');
-
-            cy.get('#first_name_2').should('have.value', 'Filip');
-            cy.get('#last_name_2').should('have.value', 'Du Prez');
+            cy.get('#first_name_1').should('have.value', 'Test');
+            cy.get('#last_name_1').should('have.value', 'User');
         });
     });
 });
