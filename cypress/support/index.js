@@ -18,4 +18,5 @@ import './chai.helpers';
 import './commands/login';
 import './commands/should';
 import './commands/prop';
+import './commands/map';
 import './l10n';
