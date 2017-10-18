@@ -40,7 +40,7 @@ volume = {MCMXCVII},
             .should('have.length', 2);
 
         cy.get('@list')
-            .invoke('prop', 'innerText')
+            .prop('innerText')
             .should('contain', 'A small paper')
             .should('contain', 'A big paper');
     });

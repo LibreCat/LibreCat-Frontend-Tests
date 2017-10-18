@@ -63,13 +63,11 @@ describe('The mark/unmark publication feature', function() {
             .should('have.text', title1);
 
         cy.contains('#export_facet a', 'BibTeX')
-            .invoke('attr', 'href')
-            .then(function(downloadUrl) {
-                cy.request(downloadUrl)
-                    .then(function(response) {
-                        expect(response.headers['content-disposition']).to.match(/^attachment; filename=/);
-                        expect(response.headers['content-type']).to.eq('text/x-bibtex; charset=utf-8');
-                    });
+            .prop('href')
+            .then(cy.request)
+            .then(function(response) {
+                expect(response.headers['content-disposition']).to.match(/^attachment; filename=/);
+                expect(response.headers['content-type']).to.eq('text/x-bibtex; charset=utf-8');
             });
 
         cy.contains('.mark_all', 'Unmark all')
