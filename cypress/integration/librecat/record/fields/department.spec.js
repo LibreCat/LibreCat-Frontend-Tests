@@ -3,6 +3,9 @@ describe('The department field', function() {
         cy.login();
 
         cy.visit('/librecat/record/new?type=book');
+
+        cy.server();
+        cy.route('/get_department*').as('ajax');
     });
 
     it('should open the autocomplete list when typing the up or down key', function() {
@@ -12,6 +15,8 @@ describe('The department field', function() {
             .focus()
             .type('{downarrow}')
             .should('have.value', '');
+
+        cy.wait('@ajax');
 
         cy.contains('li', 'Department of Mathematics').should('be.visible');
 
@@ -51,7 +56,11 @@ describe('The department field', function() {
 
         cy.get('#dp_autocomplete_0').as('dp')
             .focus()
-            .type('{downarrow}')
+            .type('{downarrow}');
+
+        cy.wait('@ajax');
+
+        cy.get('@dp')
             .type('{downarrow}{enter}')
             .should('have.value', 'Department of Mathematics');
 
@@ -62,7 +71,11 @@ describe('The department field', function() {
         cy.get('#dp_autocomplete_0').as('dp')
             .should('be.enabled')
             .focus()
-            .type('{downarrow}')
+            .type('{downarrow}');
+
+        cy.wait('@ajax');
+
+        cy.get('@dp')
             .type('{downarrow}{enter}')
             .should('be.disabled');
     });
