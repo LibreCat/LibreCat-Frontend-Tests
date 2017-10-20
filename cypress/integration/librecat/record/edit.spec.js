@@ -1,9 +1,7 @@
 describe('The Edit publication page', function() {
-    beforeEach(function() {
-        cy.login();
-    });
-
     it('should load successfully', function() {
+        cy.login();
+
         cy.visit('/librecat/record/edit/2737394');
     });
 
@@ -71,7 +69,7 @@ describe('The Edit publication page', function() {
         it('should be able to reorder authors', function() {
             cy.get('#creator .row:eq(0) span:contains("First Name")')
                 .trigger('mousedown', {which: 1})
-                .trigger('mousemove', {pageX: 380, pageY: 440})
+                .trigger('mousemove', {pageX: 380, pageY: 430})
                 .trigger('mouseup');
 
             cy.get('#first_name_0').should('have.value', 'Alan');
