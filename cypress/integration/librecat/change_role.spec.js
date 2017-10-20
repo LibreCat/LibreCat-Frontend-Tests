@@ -35,58 +35,49 @@ describe('The Change role function', function() {
             cy.get('a:contains("Settings")').as('settings');
         });
 
-        describe('The Change role button', function() {
-            it('should be displayed', function() {
-                cy.get('@settings')
-                    .should('be.visible')
-                    .click();
+        it('should be able to switch between roles', function() {
+            cy.get('@settings')
+                .should('be.visible')
+                .click();
 
-                cy.contains('Logged in as einstein').should('be.visible');
+            cy.contains('Logged in as einstein').should('be.visible');
 
-                cy.contains('Role: Admin').should('be.visible');
+            cy.contains('Role: Admin').should('be.visible');
+            cy.contains('Role: User').should('not.exist');
 
-                cy.contains('(Change role:').should('be.visible');
+            cy.contains('(Change role:').should('be.visible');
 
-                cy.get('a[href$="/librecat/change_role/user"]')
-                    .should('have.text', 'User')
-                    .should('be.visible');
-            });
+            cy.get('a[href$="/librecat/change_role/user"]')
+                .should('have.text', 'User')
+                .should('be.visible')
+                .click();
 
-            it('should switch to the regular user view when clicked', function() {
-                cy.get('@settings').click();
+            cy.get('@settings').click();
 
-                cy.get('a[href$="/librecat/change_role/user"]').click();
+            cy.contains('Logged in as einstein').should('be.visible');
 
-                cy.get('@settings').click();
+            cy.contains('Role: User').should('be.visible');
+            cy.contains('Role: Admin').should('not.exist');
 
-                cy.contains('Logged in as einstein').should('be.visible');
+            cy.contains('(Change role:').should('be.visible');
 
-                cy.contains('Role: User').should('be.visible');
+            cy.get('a[href$="/librecat/change_role/admin"]')
+                .should('have.text', 'Admin')
+                .should('be.visible')
+                .click();
 
-                cy.contains('(Change role:').should('be.visible');
+            cy.get('@settings').click();
 
-                cy.get('a[href$="/librecat/change_role/admin"]')
-                    .should('have.text', 'Admin')
-                    .should('be.visible');
-            });
+            cy.contains('Logged in as einstein').should('be.visible');
 
-            it('should switch back to the admin user when clicked', function() {
-                cy.get('@settings').click();
+            cy.contains('Role: Admin').should('be.visible');
+            cy.contains('Role: User').should('not.exist');
 
-                cy.get('a[href$="/librecat/change_role/admin"]').click();
+            cy.contains('(Change role:').should('be.visible');
 
-                cy.get('@settings').click();
-
-                cy.contains('Logged in as einstein').should('be.visible');
-
-                cy.contains('Role: Admin').should('be.visible');
-
-                cy.contains('(Change role:').should('be.visible');
-
-                cy.get('a[href$="/librecat/change_role/user"]')
-                    .should('have.text', 'User')
-                    .should('be.visible');
-            });
+            cy.get('a[href$="/librecat/change_role/user"]')
+                .should('have.text', 'User')
+                .should('be.visible');
         });
     });
 });
