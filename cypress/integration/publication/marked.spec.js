@@ -1,14 +1,13 @@
 describe('The mark/unmark publication feature', function() {
     it('should be possible to mark and unmark publications', function() {
-        let title1 = 'Ordering of TiO2 (nanoparticles) to mesoporous structures';
-        let title2 = 'Listening challenges for children with cochlear implants in mainstream education';
+        let title1 = '\'Good As Gone\' Doesn\'t Quite Get To Greatness';
+        let title2 = 'Bibliography of pragmatics online: 13th release, updated and expanded';
 
-        cy.visit('/');
-
-        cy.contains('.nav li a', 'Publication').click();
+        cy.visit('/publication?sort=title.asc');
 
         cy.get('.row .citation-block-div a').as('titles')
             .first()
+            .should('have.text', title1)
             .click();
 
         cy.get('.label.total-marked').as('marked')
@@ -24,6 +23,7 @@ describe('The mark/unmark publication feature', function() {
 
         cy.get('@titles')
             .eq(1)
+            .should('have.text', title2)
             .click();
 
         cy.get('.label.total-marked').as('marked')
