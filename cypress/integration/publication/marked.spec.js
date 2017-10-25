@@ -90,9 +90,7 @@ describe('The mark/unmark publication feature', function() {
             .should('have.text', '0');
 
         cy.get('.citation-block-div a')
-            .then(($els) => {
-                return $els.get(Cypress._.random($els.length - 1));
-            })
+            .random()
             .click();
 
         cy.get('a.mark').as('mark').click(); // Mark
