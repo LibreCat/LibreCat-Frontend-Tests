@@ -82,4 +82,44 @@ describe('The mark/unmark publication feature', function() {
         cy.contains('You don\'t have any publications \'marked\' yet.')
             .should('be.visible');
     });
+
+    it('should display the correct count when navigating backwards to the list page', function() {
+        cy.visit('/publication');
+
+        cy.get('.total-marked').as('total')
+            .should('have.text', '0');
+
+        cy.get('.citation-block-div a')
+            .then(($els) => {
+                return $els.get(Cypress._.random($els.length - 1));
+            })
+            .click();
+
+        cy.get('a.mark').as('mark').click(); // Mark
+
+        cy.get('@total').should('have.text', '1');
+
+        cy.go('back');
+
+        cy.get('@total').should('have.text', '1');
+    });
+
+    it('should display the correct count when navigating backwards to the detail page', function() {
+        cy.visit('/publication/2737390');
+
+        cy.get('.total-marked').as('total')
+            .should('have.text', '0');
+
+        cy.get('a.mark').as('mark').click(); // Mark
+
+        cy.get('@total')
+            .should('have.text', '1')
+            .click(); // Navigates to /marked route
+
+        cy.get('@mark').click(); // Unmark
+
+        cy.go('back');
+
+        cy.get('@total').should('have.text', '0');
+    });
 });
