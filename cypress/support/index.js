@@ -19,5 +19,6 @@ import './commands/login';
 import './commands/should';
 import './commands/prop';
 import './commands/map';
+import './commands/random';
 import './commands/delete-record';
 import './l10n';
