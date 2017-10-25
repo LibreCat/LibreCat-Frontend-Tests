@@ -6,7 +6,7 @@ describe('Issue #264: Searching for "Peeters Netherlands"', function() {
 
         cy.get('input[name=q]').type('Peeters Netherlands{enter}');
 
-        cy.contains('PUB-ID: 2737384').should('be.visible');
+        cy.contains('LibreCat-ID: 2737384').should('be.visible');
 
         cy.contains('a', 'Regime change at a distance: Austria and the Southern Netherlands following ' +
             'the war of the Spanish succession, 1716-1725')
