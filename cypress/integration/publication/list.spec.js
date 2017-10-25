@@ -42,7 +42,7 @@ describe('The Publications page', function() {
                 it('should display the number of marked publications', function() {
                     cy.server();
                     cy.route({
-                        url: '/marked_total',
+                        url: '/marked_total*',
                         response: {
                             total: 1234,
                             ok: 1,
