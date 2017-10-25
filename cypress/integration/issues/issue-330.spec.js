@@ -9,7 +9,7 @@ describe('Issue #330: Redundant AJAX/XHR requests', function() {
         let countRequests = 0;
 
         cy.route({
-            url: '/marked_total',
+            url: '/marked_total*',
             onRequest() {
                 countRequests++;
             },
