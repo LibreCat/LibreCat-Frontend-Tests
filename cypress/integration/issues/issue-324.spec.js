@@ -27,7 +27,7 @@ note = {to appear},
             .next('ul')
             .contains('li a', 'Edit').as('edit')
             .prop('href')
-            .should('match', /\/librecat\/record\/edit\/\d+$/)
+            .should('match', /\/librecat\/record\/edit\/\d+$/);
 
         cy.wait(1000);
         cy.get('@edit').click();
