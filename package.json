@@ -15,7 +15,7 @@
   },
   "homepage": "https://github.com/LibreCat/LibreCat-Frontend-Tests#readme",
   "devDependencies": {
-    "cypress": "^1.1.0",
+    "cypress": "^1.1.1",
     "he": "^1.1.1"
   },
   "dependencies": {
