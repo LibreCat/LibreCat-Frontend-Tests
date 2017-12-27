@@ -5,9 +5,13 @@ Cypress frontend tests for LibreCat
 In order to run the tests locally:
 
 * Make sure LibreCat is running at http://localhost:5001
-* Clone this repository
+* Clone this repository with the recursive flag: `git clone --recursive git@github.com:LibreCat/LibreCat-Frontend-Tests.git`
 * `cd LibreCat-Frontend-Tests`
 * Execute `npm install`
+
+If you already cloned this repository in the past, you may need to initialize and/or update the [cypress-common](https://github.com/Universiteitsbibliotheek/cypress-common) submodule manually:
+
+* `git submodule update --init --recursive`
 
 #### Translations
 
