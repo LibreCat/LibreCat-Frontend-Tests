@@ -17,10 +17,10 @@
 import './common/helpers/chai';
 import './common/commands/map';
 import './common/commands/prop';
+import './common/commands/random';
 
 import './commands/login';
 import './commands/should';
-import './commands/random';
 import './commands/delete-record';
 
 import './l10n';
