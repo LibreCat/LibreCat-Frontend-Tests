@@ -16,10 +16,10 @@
 // Import commands.js using ES2015 syntax:
 import './common/helpers/chai';
 import './common/commands/map';
+import './common/commands/prop';
 
 import './commands/login';
 import './commands/should';
-import './commands/prop';
 import './commands/random';
 import './commands/delete-record';
 
