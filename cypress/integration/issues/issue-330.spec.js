@@ -13,6 +13,8 @@ describe('Issue #330: Redundant AJAX/XHR requests', function() {
 
         cy.visit('/publication/2737395');
 
+        cy.wait('@marked');
+
         cy.get('@marked.all').should('have.length', 1);
     });
 
@@ -29,7 +31,11 @@ describe('Issue #330: Redundant AJAX/XHR requests', function() {
             .first()
             .click();
 
+        cy.get('@mark.all').should('have.length', 0);
+
         cy.get('a.mark').click();
+
+        cy.wait('@mark');
 
         cy.get('@mark.all').should('have.length', 1);
     });
@@ -58,6 +64,8 @@ describe('Issue #330: Redundant AJAX/XHR requests', function() {
         cy.get('@unmark.all').should('have.length', 0);
 
         cy.get('a.mark').click(); // Unmarking
+
+        cy.wait('@unmark');
 
         cy.get('@unmark.all').should('have.length', 1);
     });
