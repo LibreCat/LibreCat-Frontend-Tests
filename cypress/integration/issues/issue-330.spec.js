@@ -6,62 +6,22 @@ describe('Issue #330: Redundant AJAX/XHR requests', function() {
     });
 
     it('should only load the marked total once when loading a publication detail page', function() {
-        let countRequests = 0;
-
         cy.route({
             url: '/marked_total*',
-            onRequest() {
-                countRequests++;
-            },
             response: {},
-        });
+        }).as('marked');
 
-        cy.visit('/publication/2737395')
-            .then(function() {
-                expect(countRequests).to.eq(1);
-            });
+        cy.visit('/publication/2737395');
+
+        cy.get('@marked.all').should('have.length', 1);
     });
 
     it('should only fire ajax request once when marking publication', function() {
-        let countRequests = 0;
-
-        cy.route({
-            url: '/mark/*',
-            method: 'POST',
-            onRequest() {
-                countRequests++;
-            },
-            response: {},
-        });
-
-        cy.visit('/publication');
-
-        cy.get('.tab-pane .citation-block-div a')
-            .first()
-            .click();
-
-        cy.get('a.mark')
-            .click()
-            .then(() => expect(countRequests).to.eq(1));
-    });
-
-    it('should only fire ajax request once when unmarking publication', function() {
-        let countRequests = 0;
-
         cy.route({
             url: '/mark/*',
             method: 'POST',
             response: {},
-        });
-
-        cy.route({
-            url: '/mark/*?x-tunneled-method=DELETE',
-            method: 'POST',
-            onRequest() {
-                countRequests++;
-            },
-            response: {},
-        });
+        }).as('mark');
 
         cy.visit('/publication');
 
@@ -71,8 +31,34 @@ describe('Issue #330: Redundant AJAX/XHR requests', function() {
 
         cy.get('a.mark').click();
 
-        cy.get('a.mark')
-            .click()
-            .then(() => expect(countRequests).to.eq(1));
+        cy.get('@mark.all').should('have.length', 1);
+    });
+
+    it('should only fire ajax request once when unmarking publication', function() {
+        cy.route({
+            url: '/mark/*',
+            method: 'POST',
+            response: {},
+        });
+
+        cy.route({
+            url: '/mark/*?x-tunneled-method=DELETE',
+            method: 'POST',
+            response: {},
+        }).as('unmark');
+
+        cy.visit('/publication');
+
+        cy.get('.tab-pane .citation-block-div a')
+            .first()
+            .click();
+
+        cy.get('a.mark').click(); // Marking
+
+        cy.get('@unmark.all').should('have.length', 0);
+
+        cy.get('a.mark').click(); // Unmarking
+
+        cy.get('@unmark.all').should('have.length', 1);
     });
 });
