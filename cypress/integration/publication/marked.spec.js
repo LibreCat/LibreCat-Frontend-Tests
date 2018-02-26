@@ -3,12 +3,16 @@ describe('The mark/unmark publication feature', function() {
         let title1 = '\'Good As Gone\' Doesn\'t Quite Get To Greatness';
         let title2 = 'Bibliography of pragmatics online: 13th release, updated and expanded';
 
+        cy.server();
+        cy.route('/marked_total*').as('marked_total');
+
         cy.visit('/publication?sort=title.asc');
 
         cy.get('.row .citation-block-div a').as('titles')
             .first()
             .should('have.text', title1)
             .click();
+        cy.wait('@marked_total');
 
         cy.get('.label.total-marked').as('marked')
             .should('have.text', '0');
@@ -16,25 +20,27 @@ describe('The mark/unmark publication feature', function() {
         cy.contains('.nav a', ' Mark/Unmark publication').as('mark')
             .click();
 
-        cy.get('.label.total-marked').as('marked')
+        cy.get('@marked')
             .should('have.text', '1');
 
         cy.go('back');
+        cy.wait('@marked_total');
 
         cy.get('@titles')
             .eq(1)
             .should('have.text', title2)
             .click();
+        cy.wait('@marked_total');
 
-        cy.get('.label.total-marked').as('marked')
-            .should('have.text', '1');
+        cy.get('@marked').should('have.text', '1');
 
         cy.contains('.nav a', ' Mark/Unmark publication').as('mark')
             .click();
 
-        cy.get('.label.total-marked').as('marked')
+        cy.get('@marked')
             .should('have.text', '2')
             .click();
+        cy.wait('@marked_total');
 
         cy.get('main .row:nth-child(2) ul.nav li.active a')
             .should('have.text', '2 Marked Publication(s)');
@@ -84,6 +90,7 @@ describe('The mark/unmark publication feature', function() {
     });
 
     it('should display the correct count when navigating backwards to the list page', function() {
+        cy.server();
         cy.visit('/publication');
 
         cy.get('.total-marked').as('total')
@@ -97,12 +104,17 @@ describe('The mark/unmark publication feature', function() {
 
         cy.get('@total').should('have.text', '1');
 
+        cy.route('/marked_total*').as('marked_total');
+
         cy.go('back');
+
+        cy.wait('@marked_total');
 
         cy.get('@total').should('have.text', '1');
     });
 
     it('should display the correct count when navigating backwards to the detail page', function() {
+        cy.server();
         cy.visit('/publication/2737390');
 
         cy.get('.total-marked').as('total')
@@ -116,7 +128,11 @@ describe('The mark/unmark publication feature', function() {
 
         cy.get('@mark').click(); // Unmark
 
+        cy.route('/marked_total*').as('marked_total');
+
         cy.go('back');
+
+        cy.wait('@marked_total');
 
         cy.get('@total').should('have.text', '0');
     });
