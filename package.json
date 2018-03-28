@@ -15,10 +15,11 @@
   },
   "homepage": "https://github.com/LibreCat/LibreCat-Frontend-Tests#readme",
   "devDependencies": {
-    "cypress": "^1.0.2",
+    "cypress": "^2.0.3",
     "he": "^1.1.1"
   },
   "dependencies": {
+    "cypress-common": "https://github.com/Universiteitsbibliotheek/cypress-common.git#2.0.0",
     "lorem-ipsum": "^1.0.4"
   }
 }

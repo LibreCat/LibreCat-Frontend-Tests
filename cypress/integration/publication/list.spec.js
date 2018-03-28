@@ -38,6 +38,28 @@ describe('The Publications page', function() {
                     cy.get('@hits-per-page-button')
                         .should('have.text', `${this.t.facets.hits_per_page}: 100`);
                 });
+
+                it('should display the number of marked publications', function() {
+                    cy.server();
+                    cy.route({
+                        url: '/marked_total*',
+                        response: {
+                            total: 1234,
+                            ok: 1,
+                        },
+                    });
+
+                    cy.visit('/publication');
+
+                    cy.contains('a', this.t.mark.marked_publication)
+                        .should('be.visible')
+                        .should('have.attr', 'href')
+                        .should('end.with', '/marked');
+
+                    cy.get('.total-marked')
+                        .should('be.visible')
+                        .should('have.text', '1234');
+                });
             });
         });
     });

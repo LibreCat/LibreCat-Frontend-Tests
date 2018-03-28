@@ -33,7 +33,7 @@ describe('Issue #282: Deleted records', function() {
                     .should('match', /\/librecat\/search$/);
 
                 // Actual test
-                cy.contains('PUB-ID: ' + id).should('not.exist');
+                cy.contains('LibreCat-ID: ' + id).should('not.exist');
                 cy.contains(title).should('not.exist');
             });
     });

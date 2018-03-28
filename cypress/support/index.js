@@ -14,10 +14,13 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
-import './chai.helpers';
+import 'cypress-common/helpers/chai';
+import 'cypress-common/commands/map';
+import 'cypress-common/commands/prop';
+import 'cypress-common/commands/random';
+
 import './commands/login';
 import './commands/should';
-import './commands/prop';
-import './commands/map';
 import './commands/delete-record';
+
 import './l10n';
