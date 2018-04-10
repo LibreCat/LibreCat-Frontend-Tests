@@ -54,18 +54,5 @@ describe('The Manage Accounts page', function() {
 
             cy.get('h3:contains("Results")').should('be.visible');
         });
-
-        it('should load number of publications for users', function() {
-            cy.server();
-            cy.route('/num_of_publ/1', {total: '123'}).as('publ1');
-            cy.route('/num_of_publ/1234', {total: '987'}).as('publ2');
-
-            cy.visit('/librecat/admin/account/search');
-
-            cy.wait(['@publ1', '@publ2']);
-
-            cy.get('.num_publ[data-id=1]').should('have.text', '123');
-            cy.get('.num_publ[data-id=1234]').should('have.text', '987');
-        });
     });
 });
