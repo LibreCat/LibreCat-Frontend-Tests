@@ -11,7 +11,7 @@ describe('Issue #330: Redundant AJAX/XHR requests', function() {
             response: {},
         }).as('marked');
 
-        cy.visit('/publication/2737395');
+        cy.visit('/record/2737395');
 
         cy.wait('@marked');
 
@@ -25,7 +25,7 @@ describe('Issue #330: Redundant AJAX/XHR requests', function() {
             response: {},
         }).as('mark');
 
-        cy.visit('/publication');
+        cy.visit('/record');
 
         cy.get('.tab-pane .citation-block-div a')
             .first()
@@ -53,7 +53,7 @@ describe('Issue #330: Redundant AJAX/XHR requests', function() {
             response: {},
         }).as('unmark');
 
-        cy.visit('/publication');
+        cy.visit('/record');
 
         cy.get('.tab-pane .citation-block-div a')
             .first()

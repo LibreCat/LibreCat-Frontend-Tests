@@ -6,7 +6,7 @@ describe('The mark/unmark publication feature', function() {
         cy.server();
         cy.route('/marked_total*').as('marked_total');
 
-        cy.visit('/publication?sort=title.asc');
+        cy.visit('/record?sort=title.asc');
 
         cy.get('.row .citation-block-div a').as('titles')
             .first()
@@ -91,7 +91,7 @@ describe('The mark/unmark publication feature', function() {
 
     it('should display the correct count when navigating backwards to the list page', function() {
         cy.server();
-        cy.visit('/publication');
+        cy.visit('/record');
 
         cy.get('.total-marked').as('total')
             .should('have.text', '0');
@@ -115,7 +115,7 @@ describe('The mark/unmark publication feature', function() {
 
     it('should display the correct count when navigating backwards to the detail page', function() {
         cy.server();
-        cy.visit('/publication/2737390');
+        cy.visit('/record/2737390');
 
         cy.get('.total-marked').as('total')
             .should('have.text', '0');
