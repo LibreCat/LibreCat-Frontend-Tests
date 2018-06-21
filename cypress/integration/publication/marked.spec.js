@@ -1,7 +1,7 @@
 describe('The mark/unmark publication feature', function() {
     it('should be possible to mark and unmark publications', function() {
         let title1 = '\'Good As Gone\' Doesn\'t Quite Get To Greatness';
-        let title2 = 'Bibliography of pragmatics online: 13th release, updated and expanded';
+        let title2 = 'A C++ Implementation of the reversed Attentional Vector Sum (rAVS) model';
 
         cy.server();
         cy.route('/marked_total*').as('marked_total');

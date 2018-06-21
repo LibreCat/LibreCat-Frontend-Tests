@@ -1,2 +1,2 @@
 # Check https://dashboard.cypress.io/#/projects/511wso/settings for the record key
-yarn cypress run --config videoRecording=true --record --key <record key>
+yarn cypress run --config video=true --record --key <record key>
