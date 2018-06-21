@@ -2,8 +2,9 @@
     let locales = Cypress.env('locales');
     let translations;
 
-    before(function() {
-        if (locales && Object.keys(locales).length) {
+    const l10nInit = () => {
+        if (typeof translations === 'undefined') {
+            console.log('Loading l10n translation files...');
             translations = {};
 
             Object.keys(locales).forEach((locale) => {
@@ -24,12 +25,14 @@
                 });
             });
         } else {
-            translations = null;
+            console.log('Reusing cached l10n translation files.');
         }
-    });
+    };
 
     global.l10n = (fn) => {
         if (locales && Object.keys(locales).length) {
+            before(l10nInit);
+
             Object.keys(locales).forEach((locale) => {
                 describe(`In ${locale.toUpperCase()} locale`, function() {
                     beforeEach(function() {
