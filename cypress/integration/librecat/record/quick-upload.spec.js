@@ -1,5 +1,8 @@
 describe('The quick and easy upload feature', function() {
     it('should be able to start a publication from an uploaded file', function() {
+        cy.server();
+        cy.route('POST', '/librecat/upload').as('upload');
+
         cy.login();
 
         cy.visit('/librecat');
@@ -18,6 +21,8 @@ describe('The quick and easy upload feature', function() {
                         cy.log('Added file logo.png');
                     });
             });
+
+        cy.wait('@upload');
 
         cy.get('.dropzone form')
             .within(function() {

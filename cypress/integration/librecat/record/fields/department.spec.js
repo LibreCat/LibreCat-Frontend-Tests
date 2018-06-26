@@ -40,9 +40,13 @@ describe('The department field', function() {
     it('should open the autocomplete list when typing', function() {
         cy.contains('li', 'Department of Mathematics').should('not.exist');
 
-        cy.get('#dp_autocomplete_0')
+        cy.get('#dp_autocomplete_0').as('autocomplete')
             .focus()
-            .type('department')
+            .type('department');
+
+        cy.wait('@ajax');
+
+        cy.get('@autocomplete')
             .should('have.value', 'department');
 
         cy.contains('li', 'Department of Mathematics')
