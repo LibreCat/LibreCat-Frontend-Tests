@@ -36,7 +36,7 @@
             Object.keys(locales).forEach((locale) => {
                 describe(`In ${locale.toUpperCase()} locale`, function() {
                     beforeEach(function() {
-                        cy.visit('/set_language?lang=' + locale);
+                        cy.setCookie('lang', locale);
 
                         this.t = translations[locale];
                     });
