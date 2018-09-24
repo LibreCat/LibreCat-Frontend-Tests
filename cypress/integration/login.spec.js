@@ -32,7 +32,7 @@ describe('The login page', function() {
         it('should redirect to /librecat upon login', function() {
             cy.visit('/login');
 
-            cy.contains('My Publication List').should('not.exist');
+            cy.contains(this.t.header.my_author_page).should('not.exist');
 
             cy.get('#id_login')
                 .should('be.visible')
@@ -48,9 +48,7 @@ describe('The login page', function() {
 
             cy.url().should('match', /\/librecat$/);
 
-            // NOTE: There's a bug here, this should be in German but locale is overwritten during login
-            // See LibreCat issue #305 (https://github.com/LibreCat/LibreCat/issues/305)
-            cy.contains('My Publication List').should('be.visible');
+            cy.contains(this.t.header.my_author_page).should('be.visible');
         });
     });
 

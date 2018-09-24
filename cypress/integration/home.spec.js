@@ -19,6 +19,8 @@ describe('The Home page', function() {
 
     l10n(() => {
         it('should display the title', function() {
+            cy.visit('/');
+
             cy.get('#banner > h1')
                 .should('have.length', 1)
                 .should('be.visible')
