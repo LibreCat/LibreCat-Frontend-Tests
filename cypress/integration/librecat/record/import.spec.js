@@ -31,7 +31,7 @@ volume = {MCMXCVII},
                 cy.contains('.btn', 'Import').click();
             });
 
-        cy.contains('h2', 'Imported 2 record(s) from bibtex')
+        cy.contains('h3', 'Imported 2 record(s) from bibtex')
             .should('be.visible')
             .next('ul').as('list');
 

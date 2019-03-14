@@ -31,7 +31,7 @@ describe('The quick and easy upload feature', function() {
                 cy.get(':submit').click();
             });
 
-        cy.contains('h2', 'Imported 1 record(s) from dropzone')
+        cy.contains('h3', 'Imported 1 record(s) from dropzone')
             .should('be.visible')
             .next('ul')
             .find('li')

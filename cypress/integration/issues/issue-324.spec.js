@@ -23,7 +23,7 @@ note = {to appear},
                 cy.contains('.btn', 'Import').click();
             });
 
-        cy.contains('h2', 'Imported 1 record(s) from bibtex')
+        cy.contains('h3', 'Imported 1 record(s) from bibtex')
             .next('ul')
             .contains('li a', 'Edit').as('edit')
             .prop('href')
