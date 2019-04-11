@@ -1,6 +1,6 @@
 describe('The Data Publications page', function() {
     it('should load successfully', function() {
-        cy.visit('/data');
+        cy.visit('/record');
     });
 
     it('should not show the language ID', function() {
