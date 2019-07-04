@@ -12,7 +12,7 @@ describe('The Add New Publication page', function() {
             cy.visit('/librecat/record/new');
 
             cy.get('a[href*="/librecat/record/new?type="]')
-                .should('have.length', 19)
+                .should('have.length', 20)
                 .then(($els) => {
                     return Cypress._.chain($els)
                         .map('href').map((i) => {
