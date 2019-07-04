@@ -11,7 +11,7 @@ describe('The backend homepage', function() {
         it('should not display the edit profile form', function() {
             cy.get('.authorIds_input').as('form')
                 .should('exist')
-                .should('have.length', 10)
+                .should('have.length', 9)
                 .should('not.be.visible');
 
             cy.get('#author_ids_edit').as('edit').click();
