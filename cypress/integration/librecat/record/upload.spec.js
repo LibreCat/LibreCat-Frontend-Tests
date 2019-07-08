@@ -27,7 +27,7 @@ describe('The file upload function', function() {
             .should('exist')
             .should('not.be.visible');
 
-        cy.get('#pub_license_alert').as('license-alert')
+        cy.get('#has_accepted_license_alert').as('license-alert')
             .should('have.class', 'alert-info')
             .should('not.have.class', 'alert-danger');
 
