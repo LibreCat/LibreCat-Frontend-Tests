@@ -43,8 +43,6 @@ describe('The Manage Accounts page', function() {
         });
 
         it('should display number of results after search', function() {
-            cy.get('h3:contains("Results")').should('not.exist');
-
             cy.get('form#admin-account-search')
                 .within(() => {
                     cy.get(':submit')
