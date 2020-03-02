@@ -1,5 +1,5 @@
-describe('The mark/unmark publication feature', function () {
-  it('should be possible to mark and unmark publications', function () {
+describe('The mark/unmark publication feature', function() {
+  it('should be possible to mark and unmark publications', function() {
     let title1 = "'Good As Gone' Doesn't Quite Get To Greatness"
     let title2 = 'A C++ Implementation of the reversed Attentional Vector Sum (rAVS) model'
 
@@ -62,12 +62,14 @@ describe('The mark/unmark publication feature', function () {
     cy.contains('#export_facet a', 'BibTeX')
       .prop('href')
       .then(cy.request)
-      .then(function (response) {
-        expect(response.headers['content-disposition']).to.match(/^attachment; filename=/)
-        expect(response.headers['content-type']).to.eq('text/x-bibtex; charset=utf-8')
+      .then(function(response) {
+        expect(response.headers['content-disposition']).to.match(/^inline;filename=/)
+        expect(response.headers['content-type']).to.eq('text/x-bibtex;charset=utf-8')
       })
 
     cy.contains('.mark_all', 'Unmark all').click()
+
+    cy.visit('/marked')
 
     cy.get('.mark_all').should('not.exist')
 
@@ -76,7 +78,7 @@ describe('The mark/unmark publication feature', function () {
     cy.contains("You don't have any publications 'marked' yet.").should('be.visible')
   })
 
-  it('should display the correct count when navigating backwards to the list page', function () {
+  it('should display the correct count when navigating backwards to the list page', function() {
     cy.server()
     cy.visit('/record')
 
@@ -99,7 +101,7 @@ describe('The mark/unmark publication feature', function () {
     cy.get('.total-marked').should('have.text', '1')
   })
 
-  it('should display the correct count when navigating backwards to the detail page', function () {
+  it('should display the correct count when navigating backwards to the detail page', function() {
     cy.server()
     cy.visit('/record/2737390')
 
