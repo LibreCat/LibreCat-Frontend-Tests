@@ -11,12 +11,6 @@ describe('The Home page', function() {
         });
     });
 
-    it('should not show the language ID', function() {
-        cy.get('#language_id')
-            .should('exist')
-            .should('not.be.visible');
-    });
-
     l10n(() => {
         it('should display the title', function() {
             cy.visit('/');

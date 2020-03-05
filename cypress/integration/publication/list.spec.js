@@ -3,12 +3,6 @@ describe('The Publications page', function() {
         cy.visit('/record');
     });
 
-    it('should not show the language ID', function() {
-        cy.get('#language_id')
-            .should('exist')
-            .should('not.be.visible');
-    });
-
     l10n(() => {
         describe('The Display / Sort options', function() {
             describe('The Hits per page option', function() {
