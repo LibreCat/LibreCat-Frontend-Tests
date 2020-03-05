@@ -1,5 +1,5 @@
-describe('The Manage Accounts page', function() {
-  it('should not be publically exposed', function() {
+describe('The Manage Accounts page', () => {
+  it('should not be publically exposed', () => {
     cy.visit('/librecat/admin/account')
 
     cy.url().should('match', /\/login\?return_url=.*%2Flibrecat%2Fadmin%2Faccount$/)
@@ -17,8 +17,8 @@ describe('The Manage Accounts page', function() {
       .should('eq', 'Manage Account Information')
   })
 
-  describe('As unauthorized user', function() {
-    it('should not be available', function() {
+  describe('As unauthorized user', () => {
+    it('should not be available', () => {
       cy.login()
 
       cy.request({
@@ -30,18 +30,18 @@ describe('The Manage Accounts page', function() {
     })
   })
 
-  describe('As authorized user', function() {
-    beforeEach(function() {
+  describe('As authorized user', () => {
+    beforeEach(() => {
       cy.login('einstein', 'einstein')
+
+      cy.visit('/librecat/admin/account')
     })
 
-    it('should display the Add new account button', function() {
-      cy.visit('/librecat/admin/account')
-
+    it('should display the Add new account button', () => {
       cy.get('.btn:contains("Add new account")').should('be.visible')
     })
 
-    it('should display number of results after search', function() {
+    it('should display number of results after search', () => {
       cy.contains('h3', '7 Results').should('be.visible')
 
       cy.get('form#admin-account-search').within(() => {
