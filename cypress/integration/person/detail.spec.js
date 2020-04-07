@@ -6,7 +6,7 @@ describe('The Author detail page', function() {
     it('should not display the edit profile form', function() {
         cy.get('.authorIds_input')
             .should('exist')
-            .should('have.length', 10)
+            .should('have.length', 9)
             .should('not.be.visible');
     });
 });

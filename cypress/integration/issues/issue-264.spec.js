@@ -12,6 +12,6 @@ describe('Issue #264: Searching for "Peeters Netherlands"', function() {
             'the war of the Spanish succession, 1716-1725')
             .should('be.visible')
             .should('have.attr', 'href')
-            .should('end.with', '/publication/2737384');
+            .should('end.with', '/record/2737384');
     });
 });

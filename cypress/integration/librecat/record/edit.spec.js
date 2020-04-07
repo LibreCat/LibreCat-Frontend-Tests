@@ -21,6 +21,9 @@ describe('The Edit publication page', function() {
         });
 
         it('should be able to change to an internal author', function() {
+            cy.server();
+            cy.route('/search_researcher*').as('search-researcher');
+
             cy.get('#first_name_2').as('first')
                 .should('not.be.readonly')
                 .type('Elvis');
@@ -36,8 +39,11 @@ describe('The Edit publication page', function() {
                 .should('have.attr', 'src')
                 .should('end.with', 'authorized_no.png');
 
+            cy.get('@internal').click();
+
+            cy.wait('@search-researcher');
+
             cy.get('@internal')
-                .click()
                 .should('be.checked')
                 .next('img')
                 .should('have.attr', 'alt', 'Authorized')

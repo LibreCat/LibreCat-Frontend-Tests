@@ -1,5 +1,8 @@
 describe('The quick and easy upload feature', function() {
     it('should be able to start a publication from an uploaded file', function() {
+        cy.server();
+        cy.route('POST', '/librecat/upload').as('upload');
+
         cy.login();
 
         cy.visit('/librecat');
@@ -19,6 +22,8 @@ describe('The quick and easy upload feature', function() {
                     });
             });
 
+        cy.wait('@upload');
+
         cy.get('.dropzone form')
             .within(function() {
                 cy.get(':checkbox').click();
@@ -26,7 +31,7 @@ describe('The quick and easy upload feature', function() {
                 cy.get(':submit').click();
             });
 
-        cy.contains('h2', 'Imported 1 record(s) from dropzone')
+        cy.contains('h3', 'Imported 1 record(s) from dropzone')
             .should('be.visible')
             .next('ul')
             .find('li')

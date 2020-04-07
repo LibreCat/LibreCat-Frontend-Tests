@@ -1,13 +1,14 @@
 {
-    "projectId": "511wso",
-    "baseUrl": "http://localhost:5001",
-    "videoRecording": false,
-    "defaultCommandTimeout": 2000,
-    "viewportWidth": 1200,
-    "env": {
-        "locales": {
-            "en": "en.json",
-            "de": "de.json"
-        }
+  "projectId": "511wso",
+  "baseUrl": "http://localhost:5001",
+  "video": false,
+  "defaultCommandTimeout": 2000,
+  "viewportWidth": 1200,
+  "chromeWebSecurity": false,
+  "env": {
+    "locales": {
+      "en": "en.json",
+      "de": "de.json"
     }
+  }
 }

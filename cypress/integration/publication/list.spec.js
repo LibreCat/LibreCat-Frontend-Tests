@@ -1,19 +1,13 @@
 describe('The Publications page', function() {
     it('should load successfully', function() {
-        cy.visit('/publication');
-    });
-
-    it('should not show the language ID', function() {
-        cy.get('#language_id')
-            .should('exist')
-            .should('not.be.visible');
+        cy.visit('/record');
     });
 
     l10n(() => {
         describe('The Display / Sort options', function() {
             describe('The Hits per page option', function() {
                 beforeEach(function() {
-                    cy.visit('/publication');
+                    cy.visit('/record');
 
                     cy.get('button[data-target="#hitsperpage_"]').as('hits-per-page-button');
                     cy.get('#hitsperpage_').as('hits-per-page-collpasible');
@@ -33,7 +27,7 @@ describe('The Publications page', function() {
                         .find('a:contains("100")')
                         .click();
 
-                    cy.url().should('match', /publication\?limit=100/);
+                    cy.url().should('match', /record\?limit=100/);
 
                     cy.get('@hits-per-page-button')
                         .should('have.text', `${this.t.facets.hits_per_page}: 100`);
@@ -49,7 +43,7 @@ describe('The Publications page', function() {
                         },
                     });
 
-                    cy.visit('/publication');
+                    cy.visit('/record');
 
                     cy.contains('a', this.t.mark.marked_publication)
                         .should('be.visible')
