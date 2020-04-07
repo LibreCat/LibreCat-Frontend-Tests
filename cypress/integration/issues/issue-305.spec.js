@@ -1,17 +1,22 @@
 // Test for https://github.com/LibreCat/LibreCat/issues/305
 
-describe('Issue #305: Language switch + login issue', function() {
-    it('should keep the current language after login', function() {
-        cy.visit('/set_language?lang=de');
+describe('Issue #305: Language switch + login issue', function () {
+  const dict = {
+    de: 'Publikationen an der Universität LibreCat',
+    en: 'Publications at LibreCat University',
+  }
 
-        cy.get('h1')
-            .should('have.text', 'Publikationen an der Universität LibreCat');
+  Object.keys(dict).forEach((lang) =>
+    it(`should keep the current language after login (${lang})`, function () {
+      cy.visit(`/set_language?lang=${lang}`)
 
-        cy.login();
+      cy.get('h1').should('have.text', dict[lang])
 
-        cy.visit('/');
+      cy.login()
 
-        cy.get('h1')
-            .should('have.text', 'Publikationen an der Universität LibreCat');
-    });
-});
+      cy.visit('/')
+
+      cy.get('h1').should('have.text', dict[lang])
+    })
+  )
+})
