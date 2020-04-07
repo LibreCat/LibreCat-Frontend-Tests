@@ -20,6 +20,6 @@
     "lorem-ipsum": "^1.0.4"
   },
   "devDependencies": {
-    "cypress": "^4.1.0"
+    "cypress": "^4.3.0"
   }
 }
