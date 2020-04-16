@@ -1,9 +1,9 @@
 // Test for https://github.com/LibreCat/LibreCat/issues/282
 
-import loremIpsum from 'lorem-ipsum'
+import { loremIpsum } from 'lorem-ipsum'
 
-describe('Issue #282: Deleted records', function() {
-  it('should not be visible to anyone', function() {
+describe('Issue #282: Deleted records', function () {
+  it('should not be visible to anyone', function () {
     cy.login()
 
     cy.visit('/librecat/record/new?type=book')
@@ -11,11 +11,9 @@ describe('Issue #282: Deleted records', function() {
     let title = loremIpsum({ count: 1, unit: 'sentences' })
     cy.get('#id_title').type(title, { delay: 1 })
     cy.get('#id_year').type(new Date().getFullYear())
-    cy.get(':submit')
-      .first()
-      .click()
+    cy.get(':submit').first().click()
 
-    cy.contains('a', title).then(function($a) {
+    cy.contains('a', title).then(function ($a) {
       let url = $a.prop('href')
       let id = parseInt(url.match(/\/librecat\/record\/edit\/(\d+)$/)[1])
 
