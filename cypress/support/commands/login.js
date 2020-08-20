@@ -20,9 +20,15 @@ Cypress.Commands.add('login', (username, password) => {
 
   // Clear the previous cookie
   // Temp hack until cy.clearCookie('plack_session') works again
-  cy.clearCookies({
-    domain: new URL(Cypress.config('baseUrl')).hostname,
-    ...nolog,
+  cy.getCookie('lang', nolog).then(langCookie => {
+    cy.clearCookies({
+      domain: new URL(Cypress.config('baseUrl')).hostname,
+      ...nolog,
+    })
+
+    if (langCookie) {
+      cy.setCookie('lang', langCookie.value, { ...langCookie, ...nolog })
+    }
   })
 
   // Do the login
