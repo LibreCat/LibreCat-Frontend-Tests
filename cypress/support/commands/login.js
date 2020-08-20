@@ -5,7 +5,7 @@ Cypress.Commands.add('login', (username, password) => {
   // Initiate command log
   let consoleProps = {
     username: username,
-    password: password
+    password: password,
   }
 
   let log = Cypress.log({
@@ -13,13 +13,17 @@ Cypress.Commands.add('login', (username, password) => {
     message: [username, password],
     consoleProps: () => {
       return consoleProps
-    }
+    },
   })
 
   const nolog = { log: false }
 
   // Clear the previous cookie
-  cy.clearCookie('plack_session', nolog)
+  // Temp hack until cy.clearCookie('plack_session') works again
+  cy.clearCookies({
+    domain: new URL(Cypress.config('baseUrl')).hostname,
+    ...nolog,
+  })
 
   // Do the login
   cy.visit('/login', nolog)
