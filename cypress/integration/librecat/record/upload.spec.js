@@ -6,18 +6,13 @@ describe('The file upload function', function () {
   it('should be able to upload a file', function () {
     cy.visit('/librecat/record/new?type=book')
 
-    cy.server()
-    cy.route({
-      url: '/librecat/upload',
-      method: 'POST',
-      response: {
-        success: 1,
-        tempid: 'abc123',
-        access_level: 'abc234',
-        date_updated: 'abc345',
-        creator: 'abc456',
-        relation: 'abc567',
-      },
+    cy.intercept('POST', '/librecat/upload', {
+      success: 1,
+      tempid: 'abc123',
+      access_level: 'abc234',
+      date_updated: 'abc345',
+      creator: 'abc456',
+      relation: 'abc567',
     }).as('upload')
 
     cy.get('.dz-file-preview').should('have.length', 0)
@@ -55,8 +50,6 @@ describe('The file upload function', function () {
 
     cy.get('@licenses').should('be.visible')
 
-    cy.get('@license-alert')
-      .should('not.have.class', 'alert-info')
-      .should('have.class', 'alert-danger')
+    cy.get('@license-alert').should('not.have.class', 'alert-info').should('have.class', 'alert-danger')
   })
 })

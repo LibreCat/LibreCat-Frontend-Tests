@@ -9,18 +9,17 @@ describe('The quick and easy upload feature', function () {
 
     cy.contains('.btn', 'Add new Publication').click()
 
-    cy.fixture('logo.png')
-      .as('logo')
-      .get('.dropzone')
-      .then(function ($dz) {
-        const blob = Cypress.Blob.base64StringToBlob(this.logo, 'image/png')
-        blob.name = 'logo.png'
+    cy.fixture('logo.png').as('logo')
 
-        let dropzone = $dz.prop('dropzone')
-        dropzone.addFile(blob)
+    cy.get('.dropzone').then(function ($dz) {
+      const blob = Cypress.Blob.base64StringToBlob(this.logo, 'image/png')
+      blob.name = 'logo.png'
 
-        cy.log('Added file logo.png')
-      })
+      let dropzone = $dz.prop('dropzone')
+      dropzone.addFile(blob)
+
+      cy.log('Added file logo.png')
+    })
 
     cy.wait('@upload')
 
@@ -35,10 +34,7 @@ describe('The quick and easy upload feature', function () {
       .next('ul')
       .find('li')
       .should('have.length', 1)
-      .should(
-        'contain',
-        'New Quick And Easy Publication - Will be edited by LibreCat team'
-      )
+      .should('contain', 'New Quick And Easy Publication - Will be edited by LibreCat team')
       .find('a:contains("Edit")')
       .click()
 
@@ -55,9 +51,7 @@ describe('The quick and easy upload feature', function () {
 
     cy.visit('/librecat')
 
-    cy.get(
-      'a:contains("New Quick And Easy Publication - Will be edited by LibreCat team")'
-    )
+    cy.get('a:contains("New Quick And Easy Publication - Will be edited by LibreCat team")')
       .map('href')
       .each(cy.deleteRecord)
   })

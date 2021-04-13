@@ -1,18 +1,13 @@
-describe('The mark/unmark publication feature', function() {
-  it('should be possible to mark and unmark publications', function() {
+describe('The mark/unmark publication feature', function () {
+  it('should be possible to mark and unmark publications', function () {
     let title1 = "'Good As Gone' Doesn't Quite Get To Greatness"
     let title2 = 'A C++ Implementation of the reversed Attentional Vector Sum (rAVS) model'
 
-    cy.server()
-    cy.route('/marked_total*').as('marked_total')
+    cy.intercept('/marked_total*').as('marked_total')
 
     cy.visit('/record?sort=title.asc')
 
-    cy.get('.row .citation-block-div a')
-      .as('titles')
-      .first()
-      .should('have.text', title1)
-      .click()
+    cy.get('.row .citation-block-div a').as('titles').first().should('have.text', title1).click()
     cy.wait('@marked_total')
 
     cy.get('.label.total-marked').should('have.text', '0')
@@ -24,19 +19,14 @@ describe('The mark/unmark publication feature', function() {
     cy.go('back')
     cy.wait('@marked_total')
 
-    cy.get('@titles')
-      .eq(1)
-      .should('have.text', title2)
-      .click()
+    cy.get('@titles').eq(1).should('have.text', title2).click()
     cy.wait('@marked_total')
 
     cy.get('.label.total-marked').should('have.text', '1')
 
     cy.contains('.nav a', ' Mark/Unmark publication').click()
 
-    cy.get('.label.total-marked')
-      .should('have.text', '2')
-      .click()
+    cy.get('.label.total-marked').should('have.text', '2').click()
     cy.wait('@marked_total')
 
     cy.get('main .row:nth-child(2) ul.nav li.active a').should('have.text', '2 Marked Publication(s)')
@@ -62,7 +52,7 @@ describe('The mark/unmark publication feature', function() {
     cy.contains('#export_facet a', 'BibTeX')
       .prop('href')
       .then(cy.request)
-      .then(function(response) {
+      .then(function (response) {
         expect(response.headers['content-disposition']).to.match(/^inline;filename=/)
         expect(response.headers['content-type']).to.eq('text/x-bibtex;charset=utf-8')
       })
@@ -78,21 +68,18 @@ describe('The mark/unmark publication feature', function() {
     cy.contains("You don't have any publications 'marked' yet.").should('be.visible')
   })
 
-  it('should display the correct count when navigating backwards to the list page', function() {
-    cy.server()
+  it('should display the correct count when navigating backwards to the list page', function () {
     cy.visit('/record')
 
     cy.get('.total-marked').should('have.text', '0')
 
-    cy.get('.citation-block-div a')
-      .random()
-      .click()
+    cy.get('.citation-block-div a').random().click()
 
     cy.get('a.mark').click() // Mark
 
     cy.get('.total-marked').should('have.text', '1')
 
-    cy.route('/marked_total*').as('marked_total')
+    cy.intercept('/marked_total*').as('marked_total')
 
     cy.go('back')
 
@@ -101,23 +88,18 @@ describe('The mark/unmark publication feature', function() {
     cy.get('.total-marked').should('have.text', '1')
   })
 
-  it('should display the correct count when navigating backwards to the detail page', function() {
-    cy.server()
+  it('should display the correct count when navigating backwards to the detail page', function () {
     cy.visit('/record/2737390')
 
     cy.get('.total-marked').should('have.text', '0')
 
-    cy.get('a.mark')
-      .as('mark')
-      .click() // Mark
+    cy.get('a.mark').as('mark').click() // Mark
 
-    cy.get('.total-marked')
-      .should('have.text', '1')
-      .click() // Navigates to /marked route
+    cy.get('.total-marked').should('have.text', '1').click() // Navigates to /marked route
 
     cy.get('@mark').click() // Unmark
 
-    cy.route('/marked_total*').as('marked_total')
+    cy.intercept('/marked_total*').as('marked_total')
 
     cy.go('back')
 
