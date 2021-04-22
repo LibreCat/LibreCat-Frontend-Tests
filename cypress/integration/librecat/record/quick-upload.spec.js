@@ -1,7 +1,6 @@
 describe('The quick and easy upload feature', function () {
   it('should be able to start a publication from an uploaded file', function () {
-    cy.server()
-    cy.route('POST', '/librecat/upload').as('upload')
+    cy.intercept('POST', '/librecat/upload').as('upload')
 
     cy.login()
 
