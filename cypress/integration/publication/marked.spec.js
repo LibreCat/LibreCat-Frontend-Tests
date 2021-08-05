@@ -4,6 +4,7 @@ describe('The mark/unmark publication feature', function () {
     let title2 = 'A C++ Implementation of the reversed Attentional Vector Sum (rAVS) model'
 
     cy.intercept('/marked_total*').as('marked_total')
+    cy.intercept('POST', '/reorder/**').as('reorder')
 
     cy.visit('/record?sort=title.asc')
 
@@ -42,6 +43,7 @@ describe('The mark/unmark publication feature', function () {
       .trigger('mousedown', { which: 1 })
       .trigger('mousemove', { pageX: 579, pageY: 283 })
       .trigger('mouseup')
+    cy.wait('@reorder')
 
     cy.reload()
 

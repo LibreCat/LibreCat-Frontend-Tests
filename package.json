@@ -19,5 +19,8 @@
     "cypress-common": "https://github.com/Universiteitsbibliotheek/cypress-common",
     "he": "^1.2.0",
     "lorem-ipsum": "^2.0.3"
+  },
+  "devDependencies": {
+    "prettier": "^2.3.2"
   }
 }

@@ -6,6 +6,12 @@ describe('The Edit publication page', function () {
   })
 
   describe('The author field', function () {
+    beforeEach(() => {
+      cy.login()
+
+      cy.visit('/librecat/record/edit/2737394')
+    })
+
     it('should have 2 authors', function () {
       cy.get('#creator .row').should('have.length', 2)
     })
@@ -22,9 +28,17 @@ describe('The Edit publication page', function () {
     it('should be able to change to an internal author', function () {
       cy.intercept('/search_researcher*').as('search-researcher')
 
-      cy.get('#first_name_2').as('first').should('not.be.readonly').type('Elvis')
+      cy.get('#last_name_0 ~ .input-group-addon .fa-plus').click()
 
-      cy.get('#last_name_2').as('last').should('not.be.readonly').type('Presley')
+      cy.get('#first_name_2')
+        .as('first') //
+        .should('not.be.readonly')
+        .type('Elvis')
+
+      cy.get('#last_name_2')
+        .as('last') //
+        .should('not.be.readonly')
+        .type('Presley')
 
       cy.get('#idm_intern_2')
         .as('internal')
@@ -51,11 +65,11 @@ describe('The Edit publication page', function () {
     })
 
     it('should be able to remove an author', function () {
-      cy.get('#creator .row').should('have.length', 3)
-
-      cy.get('#last_name_2 ~ .input-group-addon .fa-minus').click()
-
       cy.get('#creator .row').should('have.length', 2)
+
+      cy.get('#last_name_1 ~ .input-group-addon .fa-minus').click()
+
+      cy.get('#creator .row').should('have.length', 1)
     })
 
     it('should be ordered', function () {
