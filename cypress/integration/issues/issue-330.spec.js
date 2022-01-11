@@ -28,7 +28,7 @@ describe('Issue #330: Redundant AJAX/XHR requests', function () {
   })
 
   it('should only fire ajax request once when unmarking publication', function () {
-    cy.intercept('POST', '/mark/*')
+    cy.intercept('POST', '/mark/*').as('mark')
 
     cy.intercept('POST', '/mark/*?x-tunneled-method=DELETE', {}).as('unmark')
 
@@ -37,6 +37,7 @@ describe('Issue #330: Redundant AJAX/XHR requests', function () {
     cy.get('.tab-pane .citation-block-div a').first().click()
 
     cy.get('a.mark').click() // Marking
+    cy.wait('@mark')
 
     cy.get('@unmark.all').should('have.length', 0)
 
