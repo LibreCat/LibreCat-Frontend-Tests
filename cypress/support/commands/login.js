@@ -2,19 +2,11 @@ Cypress.Commands.add('login', (username, password) => {
   username = username || 'test'
   password = password || 'secret'
 
-  cy.session([username, password], () => {
-    // Initiate command log
-    let consoleProps = {
-      username: username,
-      password: password,
-    }
-
+  cy.session(username, () => {
     let log = Cypress.log({
       name: 'login',
-      message: [username, password],
-      consoleProps: () => {
-        return consoleProps
-      },
+      message: [username],
+      consoleProps: { username, password },
     })
 
     const nolog = { log: false }

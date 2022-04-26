@@ -11,5 +11,5 @@
       "de": "de.json"
     }
   },
-  "experimentalSessionSupport": true
+  "experimentalSessionAndOrigin": true
 }
